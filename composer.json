@@ -1,5 +1,5 @@
 {
-    "name": "tamayo/laravel-scout-elastic",
+    "name": "hackerboy/laravel-scout-elastic",
     "description": "Elastic Driver for Laravel Scout",
     "keywords": ["laravel", "scout", "elasticsearch", "elastic"],
     "require": {
@@ -14,12 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ScoutEngines\\Elasticsearch\\": "src/"
+            "HackerBoy\\LaravelElasticsearch\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ScoutEngines\\Elasticsearch\\Test\\": "tests"
+            "HackerBoy\\LaravelElasticsearch\\Test\\": "tests"
         }
     },
     "suggest": {
@@ -28,7 +28,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ScoutEngines\\Elasticsearch\\ElasticsearchProvider"
+                "HackerBoy\\LaravelElasticsearch\\ElasticsearchProvider"
             ]
         }
     },

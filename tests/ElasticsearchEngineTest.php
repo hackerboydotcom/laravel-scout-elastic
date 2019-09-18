@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Collection;
 use Laravel\Scout\Builder;
-use ScoutEngines\Elasticsearch\ElasticsearchEngine;
+use HackerBoy\LaravelElasticsearch\ElasticsearchEngine;
 
 class ElasticsearchEngineTest extends PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace ScoutEngines\Elasticsearch;
+namespace HackerBoy\LaravelElasticsearch;
 
 use Laravel\Scout\Builder;
 use Laravel\Scout\Engines\Engine;
@@ -14,7 +14,7 @@ class ElasticsearchEngine extends Engine
      *
      * @var string
      */
-    protected $index;
+    protected $prefix;
     
     /**
      * Elastic where the instance of Elastic|\Elasticsearch\Client is stored.
@@ -29,10 +29,10 @@ class ElasticsearchEngine extends Engine
      * @param  \Elasticsearch\Client  $elastic
      * @return void
      */
-    public function __construct(Elastic $elastic, $index)
+    public function __construct(Elastic $elastic, $prefix)
     {
         $this->elastic = $elastic;
-        $this->index = $index;
+        $this->prefix = $prefix;
     }
 
     /**
@@ -50,7 +50,7 @@ class ElasticsearchEngine extends Engine
             $params['body'][] = [
                 'update' => [
                     '_id' => $model->getKey(),
-                    '_index' => $this->index,
+                    '_index' => $this->prefix.$model->getTable(),
                     '_type' => $model->searchableAs(),
                 ]
             ];
@@ -78,7 +78,7 @@ class ElasticsearchEngine extends Engine
             $params['body'][] = [
                 'delete' => [
                     '_id' => $model->getKey(),
-                    '_index' => $this->index,
+                    '_index' => $this->prefix.$model->getTable(),
                     '_type' => $model->searchableAs(),
                 ]
             ];
@@ -132,7 +132,7 @@ class ElasticsearchEngine extends Engine
     protected function performSearch(Builder $builder, array $options = [])
     {
         $params = [
-            'index' => $this->index,
+            'index' => $this->prefix.$builder->model->getTable(),
             'type' => $builder->index ?: $builder->model->searchableAs(),
             'body' => [
                 'query' => [

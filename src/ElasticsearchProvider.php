@@ -1,6 +1,6 @@
 <?php
 
-namespace ScoutEngines\Elasticsearch;
+namespace HackerBoy\LaravelElasticsearch;
 
 use Laravel\Scout\EngineManager;
 use Illuminate\Support\ServiceProvider;
@@ -17,7 +17,7 @@ class ElasticsearchProvider extends ServiceProvider
             return new ElasticsearchEngine(ElasticBuilder::create()
                 ->setHosts(config('scout.elasticsearch.hosts'))
                 ->build(),
-                config('scout.elasticsearch.index')
+                config('scout.elasticsearch.prefix')
             );
         });
     }
