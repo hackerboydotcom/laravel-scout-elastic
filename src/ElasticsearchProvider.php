@@ -17,7 +17,7 @@ class ElasticsearchProvider extends ServiceProvider
             return new ElasticsearchEngine(ElasticBuilder::create()
                 ->setHosts(config('scout.elasticsearch.hosts'))
                 ->build(),
-                config('scout.elasticsearch.prefix')
+                config('scout.prefix')
             );
         });
     }
