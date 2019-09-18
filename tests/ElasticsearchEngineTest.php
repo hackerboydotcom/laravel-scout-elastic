@@ -6,6 +6,13 @@ use HackerBoy\LaravelElasticsearch\ElasticsearchEngine;
 
 class ElasticsearchEngineTest extends PHPUnit_Framework_TestCase
 {
+    protected $tableName = '';
+    public function __construct()
+    {
+        parent::__construct();
+        $this->tableName = (new ElasticsearchEngineTestModel)->getTable();
+    }
+
     public function tearDown()
     {
         Mockery::close();
@@ -19,7 +26,7 @@ class ElasticsearchEngineTest extends PHPUnit_Framework_TestCase
                 [
                     'update' => [
                         '_id' => 1,
-                        '_index' => 'scout',
+                        '_index' => 'scout'.$this->tableName,
                         '_type' => 'table',
                     ]
                 ],
@@ -42,7 +49,7 @@ class ElasticsearchEngineTest extends PHPUnit_Framework_TestCase
                 [
                     'delete' => [
                         '_id' => 1,
-                        '_index' => 'scout',
+                        '_index' => 'scout'.$this->tableName,
                         '_type' => 'table',
                     ]
                 ],
@@ -57,7 +64,7 @@ class ElasticsearchEngineTest extends PHPUnit_Framework_TestCase
     {
         $client = Mockery::mock('Elasticsearch\Client');
         $client->shouldReceive('search')->with([
-            'index' => 'scout',
+            'index' => 'scout'.$this->tableName,
             'type' => 'table',
             'body' => [
                 'query' => [
